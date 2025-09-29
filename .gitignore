@@ -1,0 +1,45 @@
+## Archivos de compilación
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+[Ll]ogs/
+
+## Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Configuración temporal
+*.pidb
+*.svclog
+*.pdb
+
+## Archivos de dependencias
+packages/
+*.nupkg
+*.snupkg
+
+## Configuración local
+launchSettings.json
+
+## Archivos generados
+*.dll
+*.exe
+*.cache
+*.config
+*.dbmdl
+
+## Sistema operativo
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Otros
+*.log
