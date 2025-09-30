@@ -8,13 +8,14 @@ namespace Demo.Security.Domain.Users
         public Guid Id { get; private set; }
         public Email Email { get; private set; } = null!;
         public string UserName { get; private set; } = default!;
-        public string PasswordHash { get; private set; } = default!; // formato PBKDF2-SHA256$iter$salt$hash
+        public string PasswordHash { get; private set; } = default!;
         public bool IsActive { get; private set; } = true;
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
 
+        // ✅ Backing field para EF
         private readonly List<Role> _roles = new();
-        public IReadOnlyCollection<Role> Roles => _roles.AsReadOnly();
+        public IReadOnlyCollection<Role> Roles => _roles; // <- no AsReadOnly(), EF escribirá en _roles
 
         private User() { } // EF
 

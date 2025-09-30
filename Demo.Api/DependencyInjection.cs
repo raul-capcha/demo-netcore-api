@@ -1,14 +1,14 @@
-﻿using Demo.Security.Domain.Abstractions;
-using Demo.Security.Domain.Users;
+﻿using Demo.Security.Domain.Users;
 using Demo.Security.Infrastructure.Abstractions;
 using Demo.Security.Infrastructure.Persistence;
 using Demo.Security.Infrastructure.Persistence.Repositories;
 using Demo.Security.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Demo.Security.Domain.Abstractions;
+using Demo.Security.Infrastructure;
+using Demo.Security.Infrastructure.Email;
 
-namespace Demo.Security.Infrastructure
+namespace Demo.Api
 {
     public static class DependencyInjection
     {
@@ -25,18 +25,16 @@ namespace Demo.Security.Infrastructure
             services.AddSingleton<IPasswordHasher, Pbkdf2PasswordHasher>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
+            services.AddScoped<PasswordResetRepository>();
+
+            // Bind de opciones SMTP desde appsettings
+            services.Configure<SmtpOptions>(cfg.GetSection("Smtp"));
+
+            // Email sender productivo
+            services.AddSingleton<IEmailSender, NoopEmailSender>(); // cambia por SMTP en prod
+            //services.AddSingleton<IEmailSender, SmtpEmailSender>();
+
             return services;
         }
-    }
-
-    // Repositorio simple para Role reutilizando DbContext
-    internal sealed class RepositoryRole : IRepository<Role, Guid>
-    {
-        private readonly AppDbContext _db;
-        public RepositoryRole(AppDbContext db) => _db = db;
-        public async Task<Role?> GetByIdAsync(Guid id, CancellationToken ct = default) =>
-            await _db.Roles.FindAsync(new object?[] { id }, ct);
-        public async Task AddAsync(Role entity, CancellationToken ct = default) =>
-            await _db.Roles.AddAsync(entity, ct);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Demo.Security.Domain.Abstractions
+﻿namespace Demo.Security.Infrastructure.Abstractions
 {
     public interface IUnitOfWork
     {

@@ -1,4 +1,4 @@
-﻿using Demo.Security.Domain.Abstractions;
+﻿using Demo.Security.Infrastructure.Abstractions;
 
 namespace Demo.Security.Infrastructure.Persistence
 {
