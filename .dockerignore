@@ -1,0 +1,11 @@
+**/bin/
+**/obj/
+**/.vs/
+**/.vscode/
+**/*.user
+**/*.suo
+**/*.csproj.user
+**/*.Secrets.json
+**/node_modules/
+**/coverage/
+**/*.log
